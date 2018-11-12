@@ -1,13 +1,11 @@
 <div class="container">
 
-<h1>Create review for <%= @restaurant.name %></h1>
-<%= simple_form_for [@restaurant, @review] do |f| %>
+  <h1>Create review for <%= @restaurant.name %></h1>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
   <%= f.input :content %>
-    <%= f.input :rating %>
+  <%= f.input :rating %>
+  <%= f.submit "Add a review", class: "btn btn-primary" %>
+  <% end %>
 
-  <%= f.submit %>
-<% end %>
-
-<%= link_to 'Back', restaurants_path %>
+  <%= link_to 'Back', restaurants_path %>
 </div>
-
