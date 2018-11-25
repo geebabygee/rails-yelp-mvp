@@ -1,42 +1,52 @@
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
-
-<p>
-  <strong>Phone Number:</strong>
-  <%= @restaurant.phone_number %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @restaurant.category %>
-</p>
-
-<p>
-  <strong>Reviews Number:</strong>
-  <%= @restaurant.reviews.count %>
-</p>
-
-<strong>Review:</strong>
-<div class="container">
-  <div class="row">
-    <% @restaurant.reviews.each do |review| %>
-    <div class="col-xs-12 col-md-4">
-      <%= review.content %>
-    </div>
-    <% end %>
+<div class="restaurant-header">
+  <div class="avatar-xxl">
+    <%= image_tag @restaurant.photo, class: "avatar-xxl" %>
   </div>
-</div>
+  <div class="restaurant-menu">
 
-<%= link_to 'Back', restaurants_path %> |
-<%= link_to 'Add Review', new_restaurant_review_path(@restaurant) %>
+    <h1 class="text-center"><%= @restaurant.name %></h1>
 
+    <p>
+      <strong>Address:</strong>
+      <%= @restaurant.address %>
+    </p>
+
+    <p>
+      <strong>Phone Number:</strong>
+      <%= @restaurant.phone_number %>
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+      <%= @restaurant.category %>
+    </p>
+
+    <p>
+      <strong>Reviews Number:</strong>
+      <%= @restaurant.reviews.count %>
+    </p>
+
+  </div>
+
+
+<div id="reviews">
+  <h2>Reviews</h2>
+  <% if @restaurant.reviews.any? %>
+    <div class="container-fluid">
+      <div class="row">
+        <% @restaurant.reviews.each do |review| %>
+          <div class="col-xs-12 col-sm-4">
+              <div class="card-description">
+                <p><%= review.content %>Rating:<%= review.rating  %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p>This restaurant has no reviews yet!</p>
+  <% end %>
 
 
 <div class="container">
@@ -47,6 +57,14 @@
   <%= f.input :rating %>
   <%= f.submit "Add a review", class: "btn btn-primary" %>
   <% end %>
-
-  <%= link_to 'Back', restaurants_path %>
 </div>
+
+
+</div>
+
+
+
+
+
+<%= link_to 'Back', restaurants_path %> |
+<%= link_to 'Add Review', new_restaurant_review_path(@restaurant) %>
