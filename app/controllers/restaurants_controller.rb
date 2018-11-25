@@ -8,13 +8,11 @@ class RestaurantsController < ApplicationController
 
   def show
     #see set_restaurant before_action
+    @review = Review.new #once u embed form on show page
   end
 
   def new
     @restaurant = Restaurant.new #a new restaurant to use in the empty form
-  end
-
-  def edit
   end
 
   def create
@@ -36,5 +34,4 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :phone_number, :category)
   end
-
 end
