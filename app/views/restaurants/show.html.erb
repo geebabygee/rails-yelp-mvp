@@ -1,70 +1,60 @@
-<div class="restaurant-header">
-  <div class="avatar-xxl">
-    <%= image_tag @restaurant.photo, class: "avatar-xxl" %>
-  </div>
-  <div class="restaurant-menu">
-
-    <h1 class="text-center"><%= @restaurant.name %></h1>
-
-    <p>
-      <strong>Address:</strong>
-      <%= @restaurant.address %>
-    </p>
-
-    <p>
-      <strong>Phone Number:</strong>
-      <%= @restaurant.phone_number %>
-    </p>
-
-    <p>
-      <strong>Category:</strong>
-      <%= @restaurant.category %>
-    </p>
-
-    <p>
-      <strong>Reviews Number:</strong>
-      <%= @restaurant.reviews.count %>
-    </p>
-
-  </div>
-
-
-<div id="reviews">
-  <h2>Reviews</h2>
-  <% if @restaurant.reviews.any? %>
-    <div class="container-fluid">
-      <div class="row">
-        <% @restaurant.reviews.each do |review| %>
-          <div class="col-xs-12 col-sm-4">
-              <div class="card-description">
-                <p><%= review.content %>Rating:<%= review.rating  %></p>
-              </div>
-            </div>
-          </div>
-        <% end %>
+<div class="container margin-top">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <div class="avatar-xxl">
+        <%= image_tag @restaurant.photo, class: "avatar-xxl" %>
       </div>
     </div>
-  <% else %>
-    <p>This restaurant has no reviews yet!</p>
-  <% end %>
+    <div class="col-xs-12 col-sm-4">
+      <h2><%= @restaurant.name %></h2>
+      <p>
+        <strong>Address:</strong>
+        <%= @restaurant.address %>
+      </p>
+      <p>
+        <strong>Phone Number:</strong>
+        <%= @restaurant.phone_number %>
+      </p>
+      <p>
+        <strong>Category:</strong>
+        <%= @restaurant.category %>
+      </p>
+      <p>
+        <strong>Reviews Number:</strong>
+        <%= @restaurant.reviews.count %>
+      </p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h4><strong>Review for <%= @restaurant.name %></strong></h4>
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+      <%= f.input :content %>
+      <%= f.input :rating %>
+      <%= f.submit "Add a review", class: "btn btn-primary" %>
+      <% end %>
+    </div>
 
+    <div class="col-xs-12 col-sm-4">
+      <h4><strong>Reviews</strong></h4>
+      <% if @restaurant.reviews.any? %>
+      <% @restaurant.reviews.each do |review| %>
+      <p>
+        <strong>Content:</strong>
+        <%= review.content %>
+      </p>
+      <p>
+        <strong>Rating:</strong>
+        <%   stars = "*" * review.rating %>
+        <%= stars%>        </p>
+        <% end %>
+      </div>
+      <% else %>
+      <p>This restaurant has no reviews yet!</p>
+      <% end %>
+    </div>
 
-<div class="container">
-
-  <h1>Create review for <%= @restaurant.name %></h1>
-  <%= simple_form_for [@restaurant, @review] do |f| %>
-  <%= f.input :content %>
-  <%= f.input :rating %>
-  <%= f.submit "Add a review", class: "btn btn-primary" %>
-  <% end %>
-</div>
-
-
-</div>
-
-
-
-
-
-<%= link_to 'Back', restaurants_path %> |
-<%= link_to 'Add Review', new_restaurant_review_path(@restaurant) %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <%= link_to 'Back', restaurants_path, style: 'font-size:25px;' %>
+      </div>
+    </div>
+  </div>
