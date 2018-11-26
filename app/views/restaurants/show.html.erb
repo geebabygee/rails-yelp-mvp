@@ -35,17 +35,15 @@
 
     <div class="col-xs-12 col-sm-4">
       <h4><strong>Reviews</strong></h4>
+      <ul>
       <% if @restaurant.reviews.any? %>
       <% @restaurant.reviews.each do |review| %>
-      <p>
-        <strong>Content:</strong>
-        <%= review.content %>
-      </p>
-      <p>
-        <strong>Rating:</strong>
-        <%   stars = "*" * review.rating %>
-        <%= stars%>        </p>
+      <li>
+        <%= review.content %>&nbsp;|&nbsp;&nbsp;
+        <strong> <%stars = "*" * review.rating %><%= stars%></strong>
         <% end %>
+      </li>
+      </ul>
       </div>
       <% else %>
       <p>This restaurant has no reviews yet!</p>
